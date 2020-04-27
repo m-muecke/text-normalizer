@@ -1,3 +1,6 @@
+from sklearn.naive_bayes import GaussianNB, MultinomialNB
+from sklearn.linear_model import LogisticRegression, SGDClassifier
+
 def identity(words):
     """Identity function for tokenizer param in CountVectorizer."""
     return words
