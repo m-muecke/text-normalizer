@@ -1,5 +1,6 @@
 from sklearn.naive_bayes import GaussianNB, MultinomialNB
 from sklearn.linear_model import LogisticRegression, SGDClassifier
+from sklearn.pipeline import Pipeline
 # local import
 from normalize import TextNormalizerNLTK
 
