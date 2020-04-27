@@ -108,10 +108,6 @@ class TextNormalizerNLTK(TransformerMixin, BaseEstimator):
                                  apply_lemmatize=self.apply_lemmatize)
 
 if __name__ == '__main__':
-    # TODO: add ML functionalities
-    # TODO: add docstrings
-
-    import pandas as pd
 
     corpus = [
         'This is the first document.',
@@ -123,14 +119,6 @@ if __name__ == '__main__':
         'Is this great, walking in the park?',
         'She talks on the phone.',
     ]
-    labels = [1, 1, 1, 2, 2, 2, 3]
-    s_corpus = pd.Series(corpus)
-    
+ 
     text_normalizer = TextNormalizer()
-    
-    create_pipeline().fit
-    print('input as list')
-    print(create_pipeline().fit_transform(corpus))
-
-    print(run_multiclass())
-    # GridsearchCV: https://scikit-learn.org/stable/auto_examples/model_selection/grid_search_text_feature_extraction.html
+    normalized_corpus = list(text_normalizer.transform(corpus))
