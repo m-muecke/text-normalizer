@@ -1,4 +1,3 @@
-import nltk
 import unicodedata
 from types import GeneratorType
 from typing import List, Optional, Set
@@ -6,8 +5,8 @@ from typing import List, Optional, Set
 import nltk
 from nltk.corpus import wordnet as wn
 from nltk.stem.wordnet import WordNetLemmatizer
-from sklearn.base import BaseEstimator, TransformerMixin
 
+from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 
 class TextNormalizerNLTK(TransformerMixin, BaseEstimator):
