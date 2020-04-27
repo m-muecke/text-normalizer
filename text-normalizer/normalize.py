@@ -11,11 +11,6 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.pipeline import Pipeline
 
-from sklearn.naive_bayes import GaussianNB
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.linear_model import LogisticRegression
-from sklearn.linear_model import SGDClassifier
-
 class TextNormalizerNLTK(TransformerMixin, BaseEstimator):
     """
     Attributes:
