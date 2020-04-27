@@ -1,2 +1,3 @@
 # text-normalizer
-Text Normalizer for sklearn.
+
+Text normalizier for sklearn pipeline integration.
