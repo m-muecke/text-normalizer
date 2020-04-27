@@ -69,7 +69,16 @@ class TextNormalizerNLTK(TransformerMixin, BaseEstimator):
                   text: str,
                   remove_stopwords: Optional[bool] = True,
                   apply_lemmatize: Optional[bool] = True) -> List[str]:
-        """"""
+        """Tokenize and normalize text. 
+        
+        Args:
+            text: Input text.
+            remove_stopwords: Should stopwords be removed or not.
+            apply_lemmatize: Should lemmatization occur or not.
+        
+        Returns:
+            Normalized string list.
+        """
         if remove_stopwords and apply_lemmatize:
             return [
                 self.lemmatize(token)
@@ -95,11 +104,9 @@ class TextNormalizerNLTK(TransformerMixin, BaseEstimator):
         ]
     
     def fit(self, X, y: Optional = None):
-        """"""
         return self
 
     def transform(self, documents: List[str]) -> GeneratorType:
-        """"""
         for document in documents:
             yield self.normalize(document,
                                  remove_stopwords=self.remove_stopwords,
