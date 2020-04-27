@@ -16,7 +16,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import SGDClassifier
 
-class TextNormalizer(TransformerMixin, BaseEstimator):
+class TextNormalizerNLTK(TransformerMixin, BaseEstimator):
     """
     Attributes:
         stopwords (set): NLTK english stopwords. 
