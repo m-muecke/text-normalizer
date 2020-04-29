@@ -118,5 +118,5 @@ if __name__ == '__main__':
         'She talks on the phone.',
     ]
  
-    text_normalizer = TextNormalizer()
+    text_normalizer = TextNormalizerNLTK()
     normalized_corpus = list(text_normalizer.transform(corpus))
