@@ -1,8 +1,9 @@
-from sklearn.naive_bayes import GaussianNB, MultinomialNB
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.linear_model import LogisticRegression, SGDClassifier
+from sklearn.naive_bayes import GaussianNB, MultinomialNB
 from sklearn.pipeline import Pipeline
-# local import
-from normalize import TextNormalizerNLTK
+
+from .normalize import TextNormalizerNLTK
 
 def identity(words):
     """Identity function for tokenizer param in CountVectorizer."""
@@ -23,14 +24,11 @@ def create_pipeline(estimator=None):
     # add the estimator
     steps.append(('clf', estimator))
     return Pipeline(steps)
-    
+
 def run_multiclass():
     """Add multiclass estimators to Pipeline."""
     model_list = []
-    for form in (MultinomialNB, GaussianNB, 
+    for form in (MultinomialNB, GaussianNB,
                  LogisticRegression, SGDClassifier):
         model_list.append(create_pipeline(form()))
     return model_list
-
-if __name__ == '__main__':
-    pass

@@ -7,12 +7,11 @@ from nltk.corpus import wordnet as wn
 from nltk.stem.wordnet import WordNetLemmatizer
 
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 
 class TextNormalizerNLTK(TransformerMixin, BaseEstimator):
     """
     Attributes:
-        stopwords (set): NLTK english stopwords. 
+        stopwords (set): NLTK english stopwords.
         lemmatizer (WordNetLemmatizer): Instance of WordNetLemmatizer.
 
     Args:
@@ -22,7 +21,7 @@ class TextNormalizerNLTK(TransformerMixin, BaseEstimator):
     def __init__(self,
                  remove_stopwords: Optional[bool] = True,
                  apply_lemmatize: Optional[bool] = True):
-        self.stopwords  = set(nltk.corpus.stopwords.words('english'))
+        self.stopwords = set(nltk.corpus.stopwords.words('english'))
         self.lemmatizer = WordNetLemmatizer()
 
         self.remove_stopwords = remove_stopwords
@@ -36,7 +35,8 @@ class TextNormalizerNLTK(TransformerMixin, BaseEstimator):
         """Replace stopwords with own stopwords."""
         self.stopwords = stopwords
 
-    def is_punct(self, token: str) -> bool:
+    @staticmethod
+    def is_punct(token: str) -> bool:
         """Checks if token is punctuation or not."""
         return all(
             unicodedata.category(char).startswith('P') for char in token
@@ -62,13 +62,13 @@ class TextNormalizerNLTK(TransformerMixin, BaseEstimator):
                   text: str,
                   remove_stopwords: Optional[bool] = True,
                   apply_lemmatize: Optional[bool] = True) -> List[str]:
-        """Tokenize and normalize text. 
-        
+        """Tokenize and normalize text.
+
         Args:
             text: Input text.
             remove_stopwords: Should stopwords be removed or not.
             apply_lemmatize: Should lemmatization occur or not.
-        
+
         Returns:
             Normalized string list.
         """
@@ -78,13 +78,13 @@ class TextNormalizerNLTK(TransformerMixin, BaseEstimator):
                 for token in nltk.word_tokenize(text)
                 if not self.is_punct(token) and not self.is_stopword(token)
             ]
-        elif remove_stopwords and not apply_lemmatize:
+        if remove_stopwords and not apply_lemmatize:
             return [
                 token
                 for token in nltk.word_tokenize(text)
                 if not self.is_punct(token) and not self.is_stopword(token)
             ]
-        elif not remove_stopwords and apply_lemmatize:
+        if not remove_stopwords and apply_lemmatize:
             return [
                 self.lemmatize(token)
                 for token in nltk.word_tokenize(text)
@@ -95,7 +95,7 @@ class TextNormalizerNLTK(TransformerMixin, BaseEstimator):
             for token in nltk.word_tokenize(text)
             if not self.is_punct(token)
         ]
-    
+
     def fit(self, X, y: Optional = None):
         return self
 
@@ -117,6 +117,7 @@ if __name__ == '__main__':
         'Is this great, walking in the park?',
         'She talks on the phone.',
     ]
- 
-    text_normalizer = TextNormalizer()
+
+    text_normalizer = TextNormalizerNLTK()
     normalized_corpus = list(text_normalizer.transform(corpus))
+    print(normalized_corpus)
