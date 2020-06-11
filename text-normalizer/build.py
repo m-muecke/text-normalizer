@@ -5,16 +5,12 @@ from sklearn.pipeline import Pipeline
 
 from .normalize import TextNormalizerNLTK
 
-def identity(words):
-    """Identity function for tokenizer param in CountVectorizer."""
-    return words
-
 def create_pipeline(estimator=None):
     """Create sklearn Pipeline object."""
     steps = [
         ('norm', TextNormalizerNLTK()),
         ('vect', CountVectorizer(
-            tokenizer=identity, lowercase=False
+            tokenizer=lambda x: x, lowercase=False
         )),
         ('tfidf', TfidfTransformer())
     ]
