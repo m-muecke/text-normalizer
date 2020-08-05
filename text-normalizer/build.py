@@ -3,7 +3,7 @@ from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.naive_bayes import GaussianNB, MultinomialNB
 from sklearn.pipeline import Pipeline
 
-from .normalize import TextNormalizerNLTK
+from normalize import TextNormalizerNLTK
 
 def create_pipeline(estimator=None):
     """Create sklearn Pipeline object."""
