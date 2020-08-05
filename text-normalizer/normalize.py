@@ -6,7 +6,29 @@ import nltk
 from nltk.corpus import wordnet as wn
 from nltk.stem.wordnet import WordNetLemmatizer
 
+import spacy
 from sklearn.base import BaseEstimator, TransformerMixin
+
+class TextNormalizerSpacy(TransformerMixin, BaseEstimator):
+    def __init__(self):
+        self.nlp = spacy.load("en_core_web_sm")
+
+    def lemmatize(self, doc: List[str]) -> List[str]:
+        """Lemmatizes given input token."""
+        return [token.lemma_ for token in self.nlp(token)]
+
+    def is_stopword(self, doc: List[str]) -> List[bool]:
+        """Checks if token is in stopword list or not."""
+        return [token.is_stop for token in self.nlp(doc)]
+
+    def fit(self, X, y: Optional = None):
+        return self
+
+    def normalize(self):
+        pass
+
+    def transform(self, documents: List[str]) -> GeneratorType:
+        pass
 
 class TextNormalizerNLTK(TransformerMixin, BaseEstimator):
     """
